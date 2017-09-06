@@ -1,24 +1,56 @@
-﻿.top{
-    background-color:blue !important;
-    height:10vh;
+﻿.list-current{
+    background-color:aquamarine !important;
+    height:100vh;
 }
-.mid
-{
-    background-color:burlywood !important;
-    height:80vh;
-}
-.bot
-{
-    background-color:aliceblue !important;
-    height:10vh;
-}
-.lista
-{
-background-color:aquamarine !important;
-    height:70vh;
-}
-.mapa
-{
+
+.map{
     background-color:chocolate !important;
-    height:70vh;
+    height:100vh;
+}
+
+.responsive-container {
+    height: 100%;
+    position: relative;
+}
+
+.main {
+    height: 50vh;
+    position: relative;
+}
+/*Alignment */
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.header {
+    background: white;
+    height: 50px;
+    min-height: 50px;
+}
+
+.footer {
+    background: white;
+    height: 30px;
+    min-height: 30px;
+}
+
+.footer .navbar-text {
+        margin: 5px 0 0 0;
+        width: 100%;
 }
