@@ -1,10 +1,10 @@
 ﻿.list-current{
-    background-color:aquamarine !important;
+    background-color:aquamarine;
     height:100vh;
 }
 
 .map{
-    background-color:chocolate !important;
+    background-color:chocolate;
     height:100vh;
 }
 
@@ -14,9 +14,14 @@
 }
 
 .main {
+    width: 95%;
+    margin: 0 auto;
+    padding: 60px 0;
+
     height: 50vh;
     position: relative;
 }
+
 /*Alignment */
 .text-left {
     text-align: left;
@@ -53,4 +58,13 @@
 .footer .navbar-text {
         margin: 5px 0 0 0;
         width: 100%;
+}
+
+#scrollrow {
+    height: 100vh;
+    overflow: scroll;
+}
+
+.list-elem{
+    padding: 0px !important;
 }

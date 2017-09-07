@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="WARDEN.WebForm1" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head runat="server">
@@ -27,7 +26,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <link rel="stylesheet" type="text/css" href="StyleSheet1.css?version = 6"/>
+    <link rel="stylesheet" type="text/css" href="StyleSheet1.css?version = 8"/>
     
      
     <script src="Scripts/jquery-3.1.1.js"></script>
@@ -39,39 +38,56 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- Top navigation -->
+    <!-- Top navigation -->
         <div class="navbar navbar-default navbar-fixed-top header">
-                <div class="container-fluid" >
-                    <a class="navbar-brand" href="Home.aspx" ><b>WARDEN</b></a> 
-                </div>
+            <div class="navbar-form navbar-left">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="Home.aspx"><span>WARDEN</span></a></li>
+                </ul>
+            </div>
+            <div class="navbar-form navbar-right">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="History.aspx"><span>Notification history</span></a></li>
+                    <li role="presentation"><a href="Home.aspx"><span>Beacon List</span></a></li>
+                    <li role="presentation"><a href="Home.aspx"><span>Login</span></a></li>
+                </ul>
+            </div>
         </div>
-        <!-- /Top navigation -->
-        <!-- Main -->
+    <!-- /Top navigation -->
+    <!-- Main -->
         <div class="responsive-container main">
-        <div class="container-fluid">
-            <div class="col-xs-2">
-                <div class="list-current">
-                    <div class="panel">
+            <div class="col-md-3 col-sm-4 list-current">
+                    <div class="panel panel-info">
                         <div class="panel-heading">denumire</div>
-                        <div class="panel-body"></div>
+                        <div class="panel-body list-elem">
+                            <div class="row scrollrow">
+                                <div id="scrollrow">
+                                    <asp:GridView runat="server" ID="GridView2" AutoGenerateColumns="true" CssClass="table" ShowHeaderWhenEmpty="True">
+                                        <Columns>
+                                            <asp:BoundField DataField="something" HeaderText="something" SortExpression="somehitng" />
+                                            <asp:BoundField DataField="Ordrenr" HeaderText="Ordrenr" SortExpression="Ordrenr" />
+                                            <asp:BoundField DataField="Kundenavn" HeaderText="Kundenavn" SortExpression="Kundenavn" />
+                                            <asp:BoundField DataField="Varenr" HeaderText="Varenr" SortExpression="Varenr" />
+                                            <asp:BoundField DataField="Tegningsnr" HeaderText="Tegningsnr" SortExpression="Tegningsnr" />
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                 </div>
             </div>
-            <div class="col-xs-10">
-                <div class="map">
+            <div class="col-md-9 col-sm-8 map">
 
-                </div>
             </div>
-       </div>
-       </div>
-       <!-- Main -->
-       <!-- Footer -->
+       </div>  
+    <!-- Main -->
+    <!-- Footer -->
         <div class="navbar navbar-default navbar-fixed-bottom footer">
             <div class="container-fluid text-center">
                 <span class="navbar-text">Made by <b>WARDEN</b>. All rights reserved.</span>
             </div>
         </div>
-        <!-- /Footer -->
+    <!-- /Footer -->
    </form>
 </body>
 </html>
