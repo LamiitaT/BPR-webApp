@@ -1,70 +1,71 @@
-﻿.list-current{
-    background-color:aquamarine;
-    height:100vh;
+﻿* {
+    margin: 0;
+    padding: 0;
 }
 
-.map{
-    background-color:chocolate;
-    height:100vh;
-}
-
-.responsive-container {
+html, body {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     height: 100%;
-    position: relative;
+    padding-top: 26px;
 }
 
 .main {
-    width: 95%;
-    margin: 0 auto;
-    padding: 60px 0;
-
-    height: 50vh;
-    position: relative;
+    height: 100%;
+    background-color: blue;
+    *zoom: 1;
 }
 
-/*Alignment */
+.blist {
+    background-color: aquamarine;
+    height: 93vh;
+    padding-right: 0px !important;
+    padding-left: 10px !important;
+}
+
+.panel {
+    height: 90vh;
+    overflow: scroll;
+}
+
+.panel-heading{
+    background-color: aliceblue;
+}
+
+.map {
+    background-color: chocolate;
+    height: 93vh;
+    float: left;
+    padding-left: 0px !important;
+}
+
+#nlist {
+    background-color: antiquewhite;
+    width: 0vh;
+    height: 100vh;
+    float: left;
+}
+
 .text-left {
     text-align: left;
-}
-
-.text-right {
-    text-align: right;
 }
 
 .text-center {
     text-align: center;
 }
 
-.text-justify {
-    text-align: justify;
-}
-
-.text-nowrap {
-    white-space: nowrap;
-}
-
 .header {
     background: white;
-    height: 50px;
-    min-height: 50px;
+    height: 52px;
 }
 
 .footer {
     background: white;
-    height: 30px;
-    min-height: 30px;
+    min-height: 4vh;
 }
 
 .footer .navbar-text {
-        margin: 5px 0 0 0;
-        width: 100%;
-}
-
-#scrollrow {
-    height: 100vh;
-    overflow: scroll;
-}
-
-.list-elem{
-    padding: 0px !important;
+    margin: 5px 0 0 0;
+    width: 100%;
 }
