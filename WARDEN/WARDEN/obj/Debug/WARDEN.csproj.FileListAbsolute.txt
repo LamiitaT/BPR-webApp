@@ -64,3 +64,5 @@ C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\bin\Microsoft
 C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\obj\Debug\WARDEN.csprojResolveAssemblyReference.cache
 C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\obj\Debug\WARDEN.dll
 C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\obj\Debug\WARDEN.pdb
+C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\bin\MySql.Data.dll
+C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\bin\MySql.Data.xml

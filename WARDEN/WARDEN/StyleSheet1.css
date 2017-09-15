@@ -17,16 +17,23 @@ html, body {
     *zoom: 1;
 }
 
-.blist {
+#blist {
     background-color: aquamarine;
-    height: 93vh;
+    height: 90vh;
     padding-right: 0px !important;
     padding-left: 10px !important;
 }
 
 .panel {
-    height: 90vh;
     overflow: scroll;
+}
+
+.panel-beacons {
+    height: 90vh;
+}
+
+.panel-notifications {
+    overflow: auto;
 }
 
 .panel-heading{
@@ -42,9 +49,11 @@ html, body {
 
 #nlist {
     background-color: antiquewhite;
-    width: 0vh;
-    height: 100vh;
-    float: left;
+    width: 40vh;
+    height: 60vh;
+    z-index: 99 !important;
+    position: absolute;
+    right: 0;
 }
 
 .text-left {
