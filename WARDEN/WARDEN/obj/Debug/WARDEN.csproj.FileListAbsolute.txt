@@ -66,3 +66,4 @@ C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\obj\Debug\WAR
 C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\obj\Debug\WARDEN.pdb
 C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\bin\MySql.Data.dll
 C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\bin\MySql.Data.xml
+C:\Users\lat\Desktop\lem\SEM7\BPR2\WebApp\BPR-webApp\WARDEN\WARDEN\obj\Debug\WARDEN.csproj.CoreCompileInputs.cache

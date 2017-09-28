@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,36 +15,39 @@ namespace WARDEN
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if(Session["username"] == null)
             {
-                bind();
+                Server.Transfer("Login.aspx");
             }
 
-            MySqlConnection con = new MySqlConnection("Server=localhost;Database=warden;User id=root;");
-            MySqlCommand cmd;
-            
-            con.Open();
-            cmd = new MySqlCommand("select idn,ninfo from history_table", con);
-            DataTable datatable = new DataTable();
-            MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-            adapter.Fill(datatable);
-            AcceptedRecordsGridview.DataSource = datatable;
-            AcceptedRecordsGridview.DataBind();
-            con.Close();
+            if (!IsPostBack)
+            {
+                Bind();
+            }
+
         }
 
-        protected void bind()
+        protected void Bind()
         {
             MySqlConnection con = new MySqlConnection("Server=localhost;Database=warden;User id=root;");
-            MySqlCommand cmd;
+            MySqlCommand cmd1;
+            MySqlCommand cmd2;
 
             con.Open();
-            cmd = new MySqlCommand("select idn,ninfo from notifications_table", con);
-            DataTable datatable = new DataTable();
-            MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-            adapter.Fill(datatable);
-            PendingRecordsGridview.DataSource = datatable;
+            cmd1 = new MySqlCommand("select idn, idb, ninfo from notifications", con); //TODO: sort by dateTime when adding in list
+            DataTable datatable1 = new DataTable();
+            MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1);
+            adapter1.Fill(datatable1);
+            PendingRecordsGridview.DataSource = datatable1;
             PendingRecordsGridview.DataBind();
+
+            cmd2 = new MySqlCommand("select idn,idb, ninfo from history", con);
+            DataTable datatable2 = new DataTable();
+            MySqlDataAdapter adapter2 = new MySqlDataAdapter(cmd2);
+            adapter2.Fill(datatable2);
+            AcceptedRecordsGridview.DataSource = datatable2;
+            AcceptedRecordsGridview.DataBind();
+
             con.Close();
         }
         protected void PendingRecordsGridview_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -56,12 +58,13 @@ namespace WARDEN
                 MySqlConnection con = new MySqlConnection("Server=localhost;Database=warden;User id=root;");
 
                 con.Open();
-                MySqlCommand cmd1 = new MySqlCommand("INSERT INTO history_table (idn, ninfo) SELECT idn, ninfo FROM notifications_table where idn='" + Session["idn"].ToString() + "'", con);
-                MySqlCommand cmd2 = new MySqlCommand("delete from notifications_table where idn='" + Session["idn"].ToString() + "'", con);
+                MySqlCommand cmd1 = new MySqlCommand("INSERT INTO history (idn, idb, ntype, ninfo, time) SELECT idn, idb, ntype, ninfo, time FROM notifications where idn='" + Session["idn"].ToString() + "'", con);
+                MySqlCommand cmd2 = new MySqlCommand("UPDATE history set status='Seen by " + Session["username"].ToString() + "', timeUpdated = NOW() where idn='" + Session["idn"].ToString() + "'", con);
+                MySqlCommand cmd3 = new MySqlCommand("DELETE FROM notifications where idn='" + Session["idn"].ToString() + "'", con);
                 cmd1.ExecuteNonQuery();
                 cmd2.ExecuteNonQuery();
-                bind();
-
+                cmd3.ExecuteNonQuery();
+                Bind();
             }
         }
 

@@ -13,9 +13,23 @@ html, body {
 
 .main {
     height: 100%;
-    background-color: blue;
     *zoom: 1;
 }
+
+.header {
+    background: white;
+    height: 52px;
+}
+
+.footer {
+    background: white;
+    min-height: 4vh;
+}
+
+    .footer .navbar-text {
+        margin: 5px 0 0 0;
+        width: 100%;
+    }
 
 #blist {
     background-color: aquamarine;
@@ -124,17 +138,57 @@ html, body {
     text-align: center;
 }
 
-.header {
-    background: white;
-    height: 52px;
+/*---------Login--------------*/
+#login {
+    margin: 50px auto;
+    width: 30vh;
+    height: 40vh;
+    *zoom: 1;
 }
 
-.footer {
-    background: white;
-    min-height: 4vh;
+    #login table {
+        margin: auto;
+        padding: 22px 22px 22px 22px;
+        width: 30%;
+        border-radius: 5px;
+        border-top: 3px solid #434a52;
+        border-bottom: 3px solid #434a52;
+    }
+
+#user {
+    background-color: #3b4148 !important;
+    border-radius: 0px 3px 3px 0px;
+    margin-bottom: 1em;
+    padding: 10px 16px;
+    width: 235px;
+    height: 50px;
+    font-size: 14px;
+    color: white !important;
 }
 
-.footer .navbar-text {
-    margin: 5px 0 0 0;
+#pass {
+    background-color: #3b4148 !important;
+    border-radius: 0px 3px 3px 0px;
+    margin-bottom margin-bottom: 1em;
+    padding: 0 16px;
+    width: 235px;
+    height: 50px;
+    font-size: 14px;
+    color:white !important;
+}
+
+#login_button {
+    background-color: #a0bb3e !important;
+    border: 0;
     width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    color: black;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    font-size: 15px;
 }
+
+    #login_button:hover {
+        background-color: #70842b;
+    }
