@@ -17,6 +17,8 @@ namespace WARDEN
         {
             if(Session["username"] == null)
             {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('You pressed seen')", true);
+
                 Server.Transfer("Login.aspx");
             }
 
@@ -52,6 +54,8 @@ namespace WARDEN
         }
         protected void PendingRecordsGridview_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('You pressed seen')", true);
+
             if (e.CommandName == "seen")
             {
                 Session["idn"] = e.CommandArgument.ToString();

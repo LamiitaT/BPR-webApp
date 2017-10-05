@@ -29,7 +29,7 @@ namespace WARDEN
             foreach (DataRow dr in datatable1.Rows)
             {
                 Session["username"] = dr["username"].ToString();
-                Server.Transfer("Home.aspx");
+                Response.Redirect("Home.aspx");
             }
 
 

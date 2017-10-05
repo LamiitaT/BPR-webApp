@@ -6,16 +6,16 @@
                     <tr>
                         <td>Username</td>
                         <td>
-                            <asp:TextBox ID="user" runat="server"></asp:TextBox></td>
+                            <asp:TextBox ID="user" class="t" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Password</td>
                         <td>
-                            <asp:TextBox ID="pass" runat="server" TextMode="Password"></asp:TextBox></td>
+                            <asp:TextBox ID="pass" class="t" runat="server" TextMode="Password"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <asp:Button ID="login_button" runat="server" Text="Login" OnClick="Login_Click" />
+                            <asp:LinkButton ID="btnLogin" class="b" runat="server" OnClick="Login_Click"><span>Login</span></asp:LinkButton>
                         </td>
                     </tr>
                     <tr>
@@ -25,4 +25,4 @@
                     </tr>
                 </table>
     </div>
-    </asp:Content>
+</asp:Content>

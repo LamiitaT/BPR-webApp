@@ -66,7 +66,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="">
                                             <ItemTemplate>
-                                                <asp:Button CommandArgument='<%# Bind("idn") %>' ID="seenButton" runat="server"
+                                                <asp:LinkButton CommandArgument='<%# Bind("idn") %>' ID="seenButton" runat="server"
                                                     CausesValidation="false" CommandName="seen" Text="Seen" />
                                             </ItemTemplate>
                                         </asp:TemplateField>

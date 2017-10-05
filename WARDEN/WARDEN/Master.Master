@@ -24,7 +24,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <link rel="stylesheet" type="text/css" href="StyleSheet1.css?version = 3"/>
+    <link rel="stylesheet" type="text/css" href="StyleSheet1.css?version = 8"/>
     
      
     <script src="Scripts/jquery-3.1.1.js"></script>
@@ -80,7 +80,7 @@
     <!-- Footer -->
         <div class="navbar navbar-default navbar-fixed-bottom footer">
             <div class="container-fluid text-center">
-                <span class="navbar-text">Made by <b>WARDEN</b>. All rights reserved.</span>
+                <span class="navbar-text">Powered by <b>WARDEN</b>. All rights reserved.</span>
             </div>
         </div>
     <!-- /Footer -->
