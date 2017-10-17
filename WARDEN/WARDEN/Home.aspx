@@ -4,7 +4,12 @@
    <div class="navbar-form navbar-right">
     <ul class="nav nav-pills">
         <li role="presentation">
-            <a id="nbutton">Notifications</a>
+            <div id="noti_Container">
+                <a id="nbutton">Notifications</a>
+                <div class="noti_bubble">
+                    !
+                </div>
+            </div>
         </li>
         <li role="presentation">
             <a id="logoutButton" href="Logout.aspx">Logout</a>
@@ -31,12 +36,15 @@
         </div>
     </div>
 </div>
-    <div class="col-md-9 col-sm-8 map">
+   <div class="col-md-8" id="map">
     </div>
+    
     <div id="nlist" style="display: none">
         <div class="tabs">
             <ul class="tab-links">
-                <li class="active"><a href="#tab1">Latest</a></li>
+                <li class="active">
+                        <a href="#tab1">Latest</a>
+               </li>
                 <li><a href="#tab2">History</a></li>
             </ul>
             <div class="tabcontent">
@@ -44,34 +52,40 @@
                     <div class="panel panel-notifications">
                         <div class="panel-body">
                             <div class="scrollrow">
-                                <asp:GridView runat="server" ID="PendingRecordsGridview"
-                                    AutoGenerateColumns="False" DataKeyNames="idn"
-                                    OnRowCommand="PendingRecordsGridview_RowCommand" CssClass="table" GridLines="none">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Message info" SortExpression="ninfo">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("ninfo") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ninfo") %>'></asp:TextBox>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Beacon ID" SortExpression="idb">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("idb") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("idb") %>'></asp:Label>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="">
-                                            <ItemTemplate>
-                                                <asp:LinkButton CommandArgument='<%# Bind("idn") %>' ID="seenButton" runat="server"
-                                                    CausesValidation="false" CommandName="seen" Text="Seen" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
+                                <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                                    <ContentTemplate>
+                                        <asp:GridView runat="server" ID="PendingRecordsGridview"
+                                            AutoGenerateColumns="False" DataKeyNames="idn"
+                                            OnRowCommand="PendingRecordsGridview_RowCommand" CssClass="table" GridLines="none">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Message info" SortExpression="ninfo">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("ninfo") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ninfo") %>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Beacon ID" SortExpression="idb">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("idb") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("idb") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton CommandArgument='<%# Bind("idn") %>' ID="seenButton" runat="server"
+                                                            CausesValidation="false" CommandName="seen" Text="Seen" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                        <asp:Timer runat="server" ID="Timer1" Interval="10000" OnTick="Timer1_Tick"></asp:Timer>
+                                        <asp:Label runat="server" Text="Page not refreshed yet." ID="Label1"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>
@@ -80,35 +94,41 @@
                     <div class="panel panel-history">
                         <div class="panel-body">
                             <div class="scrollrow">
-                                <asp:GridView runat="server" ID="AcceptedRecordsGridview" AutoGenerateColumns="false"
-                                    DataKeyNames="idn" CssClass="table" GridLines="none">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="ID" SortExpression="idn">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("idn") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("idn") %>'></asp:Label>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Message info" SortExpression="ninfo">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("ninfo") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ninfo") %>'></asp:TextBox>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Beacon ID" SortExpression="idb">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("idb") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("idb") %>'></asp:Label>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
+                                <asp:UpdatePanel runat="server" ID="UpdatePanel2">
+                                    <ContentTemplate>
+                                        <asp:GridView runat="server" ID="AcceptedRecordsGridview" AutoGenerateColumns="false"
+                                            DataKeyNames="idn" CssClass="table" GridLines="none">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="ID" SortExpression="idn">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("idn") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("idn") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Message info" SortExpression="ninfo">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("ninfo") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ninfo") %>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Beacon ID" SortExpression="idb">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("idb") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("idb") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                        <asp:Timer runat="server" ID="Timer2" Interval="10000" OnTick="Timer1_Tick"></asp:Timer>
+                                        <asp:Label runat="server" Text="Page not refreshed yet." ID="Label3"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>

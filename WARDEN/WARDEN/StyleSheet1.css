@@ -55,7 +55,6 @@ html,body {
 }
 
 .map {
-    background-color: chocolate;
     height: 93vh;
     float: left;
     padding-left: 0px !important;
@@ -138,6 +137,26 @@ html,body {
     text-align: center;
 }
 
+#noti_Container {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    padding-top: 10px;
+}
+
+.noti_bubble {
+    position: absolute;
+    top: 0px;
+    right: -6px;
+    padding: 1px 5px 1px 5px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 0.7em;
+    border-radius: 30px;
+    box-shadow: 1px 1px 1px gray;
+}
+
 /*---------Login--------------*/
 #login {
     margin: 250px auto;
@@ -180,3 +199,7 @@ html,body {
     #login_button:hover {
         background-color: #70842b;
     }
+
+#map {
+    height: 100% !important;
+}

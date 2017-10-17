@@ -51,6 +51,8 @@ namespace WARDEN
             AcceptedRecordsGridview.DataBind();
 
             con.Close();
+
+            //search_results.Text = PendingRecordsGridview.Rows.Count.ToString();
         }
         protected void PendingRecordsGridview_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -70,6 +72,13 @@ namespace WARDEN
                 cmd3.ExecuteNonQuery();
                 Bind();
             }
+        }
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            Bind();
+            Label1.Text = "Panel refreshed at: " + DateTime.Now.ToLongTimeString();
+            Label3.Text = "Panel refreshed at: " + DateTime.Now.ToLongTimeString();
         }
 
     }
