@@ -26,11 +26,12 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <link rel="stylesheet" type="text/css" href="StyleSheet1.css?version = 8"/>
+    <script src="js/jquery-3.2.1.js"></script>
     
+    <!--
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqDQBtzROxo895XNbCTaWXXa9ovUjoHG4&callback=initMap">
     </script>
-    <script src="Scripts/jquery-3.1.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -82,6 +83,8 @@
             });
         }
     </script>
+    -->
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#nbutton').click(function () {
@@ -108,7 +111,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager runat="server" ID="ScriptManager1">
+        <asp:ScriptManager EnablePartialRendering="true" runat="server" ID="ScriptManager1">
         </asp:ScriptManager>
         <!-- Top navigation -->
         <div class="navbar navbar-default navbar-fixed-top header">

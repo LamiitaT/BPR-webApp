@@ -50,6 +50,10 @@ html,body {
     overflow: auto;
 }
 
+.panel-history {
+    height: 80vh;
+}
+
 .panel-heading{
     background-color: aliceblue;
 }
@@ -61,7 +65,7 @@ html,body {
 }
 
 #nlist {
-    background-color: antiquewhite;
+    background-image: url("img.jpg");
     width: 40vh;
     z-index: 99 !important;
     position: absolute;
@@ -72,6 +76,8 @@ html,body {
 .tabs {
     width: 100%;
     display: inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
     /*----- Tab Links -----*/
@@ -82,9 +88,10 @@ html,body {
         content: '';
     }
 
-    .tab-links {
-        margin-bottom: 0px !important;
-    }
+.tab-links {
+    margin-bottom: 0px !important;
+    -webkit-padding-start: 0px !important;
+}
 
     .tab-links li {
         margin: 0px 5px;
@@ -148,7 +155,7 @@ html,body {
     position: absolute;
     top: 0px;
     right: -6px;
-    padding: 1px 5px 1px 5px;
+    padding: 1px 0px 1px 0px;
     background-color: red;
     color: white;
     font-weight: bold;
@@ -200,6 +207,3 @@ html,body {
         background-color: #70842b;
     }
 
-#map {
-    height: 100% !important;
-}

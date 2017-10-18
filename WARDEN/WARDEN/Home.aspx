@@ -6,9 +6,12 @@
         <li role="presentation">
             <div id="noti_Container">
                 <a id="nbutton">Notifications</a>
-                <div class="noti_bubble">
-                    !
-                </div>
+                <asp:UpdatePanel runat="server" ID="UpdatePanel3" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="noti_bubble" id="count" runat="server">
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </li>
         <li role="presentation">
@@ -37,13 +40,14 @@
     </div>
 </div>
    <div class="col-md-8" id="map">
+
     </div>
     
     <div id="nlist" style="display: none">
         <div class="tabs">
             <ul class="tab-links">
                 <li class="active">
-                        <a href="#tab1">Latest</a>
+                    <a href="#tab1">Latest</a>
                </li>
                 <li><a href="#tab2">History</a></li>
             </ul>
@@ -52,7 +56,7 @@
                     <div class="panel panel-notifications">
                         <div class="panel-body">
                             <div class="scrollrow">
-                                <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                                <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Always">
                                     <ContentTemplate>
                                         <asp:GridView runat="server" ID="PendingRecordsGridview"
                                             AutoGenerateColumns="False" DataKeyNames="idn"
@@ -82,7 +86,7 @@
                                                 </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
-                                        <asp:Timer runat="server" ID="Timer1" Interval="10000" OnTick="Timer1_Tick"></asp:Timer>
+                                        <asp:Timer runat="server" ID="Timer1" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
                                         <asp:Label runat="server" Text="Page not refreshed yet." ID="Label1"></asp:Label>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -94,7 +98,7 @@
                     <div class="panel panel-history">
                         <div class="panel-body">
                             <div class="scrollrow">
-                                <asp:UpdatePanel runat="server" ID="UpdatePanel2">
+                                <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Always">
                                     <ContentTemplate>
                                         <asp:GridView runat="server" ID="AcceptedRecordsGridview" AutoGenerateColumns="false"
                                             DataKeyNames="idn" CssClass="table" GridLines="none">
@@ -125,7 +129,7 @@
                                                 </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
-                                        <asp:Timer runat="server" ID="Timer2" Interval="10000" OnTick="Timer1_Tick"></asp:Timer>
+                                        <asp:Timer runat="server" ID="Timer2" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
                                         <asp:Label runat="server" Text="Page not refreshed yet." ID="Label3"></asp:Label>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>

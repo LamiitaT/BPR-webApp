@@ -8,14 +8,16 @@ using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
+using System.Web.UI.HtmlControls;
 
 namespace WARDEN
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["username"] == null)
+            if (Session["username"] == null)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('You pressed seen')", true);
 
@@ -34,6 +36,7 @@ namespace WARDEN
             MySqlConnection con = new MySqlConnection("Server=localhost;Database=warden;User id=root;");
             MySqlCommand cmd1;
             MySqlCommand cmd2;
+            MySqlCommand cmd3;
 
             con.Open();
             cmd1 = new MySqlCommand("select idn, idb, ninfo from notifications", con); //TODO: sort by dateTime when adding in list
@@ -50,10 +53,28 @@ namespace WARDEN
             AcceptedRecordsGridview.DataSource = datatable2;
             AcceptedRecordsGridview.DataBind();
 
+            cmd3 = new MySqlCommand("SELECT COUNT(*) FROM notifications", con);
+            int countRows;
+            countRows = Convert.ToInt32(cmd3.ExecuteScalar());
+            //System.Diagnostics.Debug.WriteLine(countRows.ToString());
+            //System.Diagnostics.Debug.WriteLine(count.InnerHtml);
+            if (countRows > 0)
+            {
+                count.Visible = true;
+                count.InnerHtml = countRows.ToString();
+                System.Diagnostics.Debug.WriteLine(count.InnerHtml);
+                count.Style.Add("padding", "1px 5px 1px 5px");
+            }
+            else
+            {
+                count.Visible = false;
+            }
+
+
             con.Close();
 
-            //search_results.Text = PendingRecordsGridview.Rows.Count.ToString();
         }
+
         protected void PendingRecordsGridview_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('You pressed seen')", true);
@@ -70,7 +91,12 @@ namespace WARDEN
                 cmd1.ExecuteNonQuery();
                 cmd2.ExecuteNonQuery();
                 cmd3.ExecuteNonQuery();
+                con.Close();
+
                 Bind();
+                UpdatePanel3.Update();
+
+
             }
         }
 
@@ -79,7 +105,21 @@ namespace WARDEN
             Bind();
             Label1.Text = "Panel refreshed at: " + DateTime.Now.ToLongTimeString();
             Label3.Text = "Panel refreshed at: " + DateTime.Now.ToLongTimeString();
+            UpdatePanel3.Update();
         }
 
+        /*
+        protected void nbutton_Click(object sender, EventArgs e)
+        {
+            if (nlist.Visible)
+            {
+                nlist.Visible = false;
+            }
+            else
+            {
+                nlist.Visible = true;
+            }
+        }
+        */
     }
 }
