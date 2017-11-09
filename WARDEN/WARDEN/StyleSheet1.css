@@ -203,3 +203,17 @@ html,body {
 #map {
     height: 100% !important;
 }
+#scroll
+{
+     overflow-x: scroll;
+}
+#GridView1
+{
+    background-color:black;
+   border:1px !important;
+   border-color:black !important;
+   border-bottom-width:1px !important;
+}
+#GridView1 #ping{
+    margin-bottom:5px !important;
+}

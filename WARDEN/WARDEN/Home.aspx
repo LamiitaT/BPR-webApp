@@ -23,20 +23,83 @@
     <div class="panel panel-beacons">
         <div class="panel-heading">Beacons</div>
         <div class="panel-body">
-            <div class="scrollrow">
-                <asp:GridView runat="server" ID="GridView1" AutoGenerateColumns="true" CssClass="table" ShowHeaderWhenEmpty="True">
-                    <Columns>
-                        <asp:BoundField DataField="idn" HeaderText="idn" SortExpression="idn" />
-                        <asp:BoundField DataField="ntype" HeaderText="ntype" SortExpression="ntype" />
-                        <asp:BoundField DataField="ninfo" HeaderText="ninfo" SortExpression="ninfo" />
-
-                    </Columns>
-                </asp:GridView>
+            <div class="scrollrow" id="scroll">
+                <asp:GridView ID="GridView1" runat="server" 
+                    CssClass="table"
+                    GridLines="none"
+                    AutoGenerateColumns="False" 
+                    CellPadding="6" 
+                    OnRowCancelingEdit="GridView1_RowCancelingEdit"   
+                    OnRowEditing="GridView1_RowEditing" 
+                    OnRowUpdating="GridView1_RowUpdating" 
+                    CellSpacing="1" 
+                   
+                    BorderStyle="Solid" 
+                    BorderWidth="1" 
+                    BorderColor="Black" 
+                    EditRowStyle-BorderStyle="Solid" 
+                    EditRowStyle-BorderColor="Black" EditRowStyle-BorderWidth="1" HeaderStyle-BackColor="#0099CC" HeaderStyle-BorderStyle="Solid" HeaderStyle-BorderColor="Black" HeaderStyle-BorderWidth="1" RowStyle-BorderStyle="Solid" RowStyle-BorderColor="Black" RowStyle-BorderWidth="1" SelectedRowStyle-BorderStyle="Solid" SelectedRowStyle-BorderColor="Black" SelectedRowStyle-BorderWidth="1" BackColor="#33CCFF" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" PagerStyle-HorizontalAlign="Center" PagerStyle-VerticalAlign="Middle" HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" AlternatingRowStyle-HorizontalAlign="Center" AlternatingRowStyle-VerticalAlign="Middle" EditRowStyle-HorizontalAlign="Center" EditRowStyle-VerticalAlign="Middle" EmptyDataRowStyle-HorizontalAlign="Center" EmptyDataRowStyle-VerticalAlign="Middle" FooterStyle-HorizontalAlign="Center" FooterStyle-VerticalAlign="Middle" SelectedRowStyle-HorizontalAlign="Center" SelectedRowStyle-VerticalAlign="Middle">  
+            <Columns>  
+                <asp:TemplateField>  
+                    <ItemTemplate>  
+                        <asp:Button ID="ping" runat="server" Text="Ping" Width="50" CssClass="btn-primary" />  
+                        <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" Width="50" CssClass="btn-primary" />  
+                    </ItemTemplate>  
+                    <EditItemTemplate>  
+                        <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update"/>  
+                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel"/>  
+                    </EditItemTemplate>  
+                </asp:TemplateField>  
+                <asp:TemplateField HeaderText="ID">  
+                    <ItemTemplate>  
+                        <asp:Label ID="lbl_ID" runat="server" Text='<%#Eval("idcb") %>'></asp:Label>  
+                    </ItemTemplate>  
+                </asp:TemplateField>  
+                <asp:TemplateField HeaderText="X">  
+                    <ItemTemplate>  
+                        <asp:Label ID="lbl_x" runat="server" Text='<%#Eval("x") %>'></asp:Label>  
+                    </ItemTemplate>  
+                    <EditItemTemplate>  
+                        <asp:TextBox ID="txt_x" runat="server" Text='<%#Eval("x") %>'></asp:TextBox>  
+                    </EditItemTemplate>  
+                </asp:TemplateField>  
+                <asp:TemplateField HeaderText="Y">  
+                    <ItemTemplate>  
+                        <asp:Label ID="lbl_y" runat="server" Text='<%#Eval("y") %>'></asp:Label>  
+                    </ItemTemplate>  
+                    <EditItemTemplate>  
+                        <asp:TextBox ID="txt_y" runat="server" Text='<%#Eval("y") %>'></asp:TextBox>  
+                    </EditItemTemplate> 
+                </asp:TemplateField> 
+                
+                <asp:TemplateField HeaderText="Comments">  
+                    <ItemTemplate>  
+                        <asp:Label ID="lbl_comments" runat="server" Text='<%#Eval("comments") %>'></asp:Label>  
+                    </ItemTemplate>  
+                    <EditItemTemplate>  
+                        <asp:TextBox ID="txt_comments" runat="server" Text='<%#Eval("comments") %>'></asp:TextBox>  
+                    </EditItemTemplate>
+                    
+                </asp:TemplateField> 
+                <asp:TemplateField HeaderText="Last seen">  
+                    <ItemTemplate>  
+                        <asp:Label ID="lbl_ls" runat="server" Text='<%#Eval("last_seen") %>'></asp:Label>  
+                    </ItemTemplate>  
+                    <EditItemTemplate>  
+                        <asp:TextBox ID="txt_ls" runat="server" Text='<%#Eval("last_seen") %>'></asp:TextBox>  
+                    </EditItemTemplate>
+                 
+                </asp:TemplateField> 
+            </Columns>  
+            <HeaderStyle BackColor="#663300" ForeColor="#ffffff"/>  
+            <RowStyle BackColor="#e7ceb6"/>  
+        </asp:GridView> 
             </div>
         </div>
     </div>
 </div>
    <div class="col-md-8" id="map">
+
     </div>
     
     <div id="nlist" style="display: none">
