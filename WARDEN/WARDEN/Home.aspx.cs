@@ -31,7 +31,8 @@ namespace WARDEN
 
         protected void Bind()
         {
-            MySqlConnection con = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;password=1234");
+            MySqlConnection con = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;");
+            //DAN: MySqlConnection con = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;password=1234");
             MySqlCommand cmd1;
             MySqlCommand cmd2;
 
@@ -62,7 +63,7 @@ namespace WARDEN
             if (e.CommandName == "seen")
             {
                 Session["idn"] = e.CommandArgument.ToString();
-                MySqlConnection con = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;password=1234");
+                MySqlConnection con = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;");
 
                 con.Open();
                 MySqlCommand cmd1 = new MySqlCommand("INSERT INTO history (idn, idb, ntype, ninfo, time) SELECT idn, idb, ntype, ninfo, time FROM notifications where idn='" + Session["idn"].ToString() + "'", con);
@@ -85,9 +86,9 @@ namespace WARDEN
         protected void ShowData()  
     {
 
-            MySqlConnection cn = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;password=1234");
+            MySqlConnection cn = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;");
             MySqlCommand cmd1;
-            cmd1 = new MySqlCommand("Select idcb,x,y,comments,last_seen from current_beacons", cn); //TODO: sort by dateTime when adding in list
+            cmd1 = new MySqlCommand("Select idb,x,y,comments,last_seen from all_beacons ab join current_beacons cb where ab.idb = cb.idcb", cn); //TODO: sort by dateTime when adding in list
             DataTable datatable1 = new DataTable();
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1);
             adapter1.Fill(datatable1);
@@ -100,7 +101,7 @@ namespace WARDEN
 
 
          /*    DataTable dt = new DataTable();
-            cn = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;password=1234");  
+            cn = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;");  
              cn.Open();
             cmd1 = new MySqlCommand("Select idcb,x,y,comments,lastseen from tbl_Employee", cn);
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1); 
@@ -127,10 +128,10 @@ namespace WARDEN
             TextBox comm = GridView1.Rows[e.RowIndex].FindControl("txt_comments") as TextBox;
             TextBox ls = GridView1.Rows[e.RowIndex].FindControl("txt_ls") as TextBox;
 
-            MySqlConnection cn = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;password=1234");
+            MySqlConnection cn = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;");
             cn.Open();
             //updating the record  
-            MySqlCommand cmd = new MySqlCommand("Update current_beacons set x='" +x.Text + "',y='" + y.Text + "',comments='"+comm.Text+"',last_seen='"+ls.Text + "' where idcb=" + Convert.ToInt32(id.Text), cn);
+            MySqlCommand cmd = new MySqlCommand("Update all_beacons set x='" +x.Text + "',y='" + y.Text + "',comments='"+comm.Text+"',last_seen='"+ls.Text + "' where idb=" + Convert.ToInt32(id.Text), cn);
             cmd.ExecuteNonQuery();
             cn.Close();
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  

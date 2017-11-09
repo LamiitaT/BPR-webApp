@@ -200,9 +200,6 @@ html,body {
         background-color: #70842b;
     }
 
-#map {
-    height: 100% !important;
-}
 #scroll
 {
      overflow-x: scroll;

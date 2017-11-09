@@ -52,7 +52,7 @@
                 </asp:TemplateField>  
                 <asp:TemplateField HeaderText="ID">  
                     <ItemTemplate>  
-                        <asp:Label ID="lbl_ID" runat="server" Text='<%#Eval("idcb") %>'></asp:Label>  
+                        <asp:Label ID="lbl_ID" runat="server" Text='<%#Eval("idb") %>'></asp:Label>  
                     </ItemTemplate>  
                 </asp:TemplateField>  
                 <asp:TemplateField HeaderText="X">  
@@ -98,7 +98,7 @@
         </div>
     </div>
 </div>
-   <div class="col-md-8" id="map">
+   <div class="col-md-8" id="map" style="width: 500px; height: 500px">
 
     </div>
     
