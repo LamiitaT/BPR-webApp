@@ -11,7 +11,7 @@ namespace WARDEN
 {
     public partial class Login : System.Web.UI.Page
     {
-        MySqlConnection con = new MySqlConnection("server=localhost;persistsecurityinfo=True;user id=root;database=warden;");
+        MySqlConnection con = new MySqlConnection("server=localhost;user id=root;database=warden;password=1234");
 
         protected void Page_Load(object sender, EventArgs e)
         {

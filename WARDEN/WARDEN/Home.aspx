@@ -20,9 +20,20 @@
 
 <asp:Content ID="Content_Home" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 <div class="col-md-3 col-sm-4" id="blist">
+    
     <div class="panel panel-beacons">
-        <div class="panel-heading">Beacons</div>
+        <div class="panel-heading">Units
+            <div class="row" style="padding-left:10px">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="addunit">Add Unit</button>
+                <div class="input-group">
+                <asp:TextBox ID="delete" runat="server" placeholder="Enter a valid ID"></asp:TextBox> 
+                        <asp:Button ID="Deletebts" runat="server" Text="Delete" CssClass=" btn btn-info btn-sm" OnClick="btn_Edit_Click1" />  
+</div>
+            </div>
+            
+        </div>
         <div class="panel-body">
+          
             <div class="scrollrow" id="scroll">
                 <asp:GridView ID="GridView1" runat="server" 
                     CssClass="table"
@@ -42,12 +53,13 @@
             <Columns>  
                 <asp:TemplateField>  
                     <ItemTemplate>  
-                        <asp:Button ID="ping" runat="server" Text="Ping" Width="50" CssClass="btn-primary" />  
-                        <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" Width="50" CssClass="btn-primary" />  
+
+                        <asp:Button ID="ping" runat="server" Text="Ping" Width="50" CssClass="btn btn-primary btn-xs" />  
+                        <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" Width="50" CssClass=" btn btn-primary btn-xs" />  
                     </ItemTemplate>  
                     <EditItemTemplate>  
-                        <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update"/>  
-                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel"/>  
+                        <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary btn-xs"/>  
+                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-primary btn-xs"/>  
                     </EditItemTemplate>  
                 </asp:TemplateField>  
                 <asp:TemplateField HeaderText="ID">  
@@ -91,14 +103,60 @@
                  
                 </asp:TemplateField> 
             </Columns>  
-            <HeaderStyle BackColor="#663300" ForeColor="#ffffff"/>  
-            <RowStyle BackColor="#e7ceb6"/>  
+            <HeaderStyle CssClass=".simple-linear" ForeColor="#ffffff"/>  
+            <RowStyle BackColor="#87CEFA"/>  
         </asp:GridView> 
+            </div>
+            <div class="row">
+               <!-- Trigger the modal with a button -->
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Unit Data</h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+    <label for="exampleInputEmail1">X-coordinates</label>
+              <asp:TextBox type="text" CssClass="form-control" ID="xcords" runat="server"  placeholder="Enter Coordinates" ></asp:TextBox> 
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Y-coordinates</label>
+        <asp:TextBox type="text" CssClass="form-control" ID="ycords" runat="server" placeholder="Enter Coordinates"></asp:TextBox> 
+    
+  </div>
+  <div class="form-group">
+    <label for="comments">Comments</label>
+       <asp:TextBox type="text" CssClass="form-control" ID="comments" runat="server" placeholder="Enter Comments"></asp:TextBox> 
+    
+  </div>
+           <div class="form-group">
+    <label for="neighbourid">Neighbour Id</label>
+                <asp:TextBox type="text" CssClass="form-control" ID="neighbourid" runat="server" placeholder="Enter valid neighbour"></asp:TextBox> 
+    
+  </div>
+            <asp:Button ID="confirmadd" runat="server"  CssClass="btn btn-primary" Text="AddUnit" OnClick="Addbeacon_click" ></asp:Button>  
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" runat="server" >Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
             </div>
         </div>
     </div>
 </div>
-   <div class="col-md-8" id="map" style="width: 500px; height: 500px">
+   <div class="col-md-8" id="map" style="width: 1100px; height: 650px">
 
     </div>
     
@@ -150,6 +208,7 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
+                           
                         </div>
                     </div>
                 </div>
