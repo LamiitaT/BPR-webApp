@@ -51,7 +51,7 @@ html,body {
 }
 
 .panel-history {
-    height: 80vh;
+    overflow: auto;
 }
 
 .panel-heading{
@@ -66,7 +66,7 @@ html,body {
 
 #nlist {
     background-image: url("img.jpg");
-    width: 40vh;
+    width: 55vh;
     z-index: 99 !important;
     position: absolute;
     right: 0;

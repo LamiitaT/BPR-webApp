@@ -60,9 +60,9 @@
                                     <ContentTemplate>
                                         <asp:GridView runat="server" ID="PendingRecordsGridview"
                                             AutoGenerateColumns="False" DataKeyNames="idn"
-                                            OnRowCommand="PendingRecordsGridview_RowCommand" CssClass="table" GridLines="none">
+                                            OnRowCommand="PendingRecordsGridview_RowCommand" CssClass="table" GridLines="none" AllowPaging="true">
                                             <Columns>
-                                                <asp:TemplateField HeaderText="Message info" SortExpression="ninfo">
+                                                <asp:TemplateField HeaderText="Message info" SortExpression="ninfo" >
                                                     <ItemTemplate>
                                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("ninfo") %>'></asp:Label>
                                                     </ItemTemplate>
@@ -70,7 +70,7 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ninfo") %>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Beacon ID" SortExpression="idb">
+                                                <asp:TemplateField HeaderText="Unit ID" SortExpression="idb" >
                                                     <ItemTemplate>
                                                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("idb") %>'></asp:Label>
                                                     </ItemTemplate>
@@ -78,6 +78,14 @@
                                                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("idb") %>'></asp:Label>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Received" SortExpression="time">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("time") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label4" runat="server" Text='<%# Eval("time") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                    </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="">
                                                     <ItemTemplate>
                                                         <asp:LinkButton CommandArgument='<%# Bind("idn") %>' ID="seenButton" runat="server"
@@ -87,7 +95,6 @@
                                             </Columns>
                                         </asp:GridView>
                                         <asp:Timer runat="server" ID="Timer1" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
-                                        <asp:Label runat="server" Text="Page not refreshed yet." ID="Label1"></asp:Label>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -101,7 +108,7 @@
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Always">
                                     <ContentTemplate>
                                         <asp:GridView runat="server" ID="AcceptedRecordsGridview" AutoGenerateColumns="false"
-                                            DataKeyNames="idn" CssClass="table" GridLines="none">
+                                            DataKeyNames="idn" CssClass="table" GridLines="none" AllowPaging="true" OnPageIndexChanging="OnPaging">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="ID" SortExpression="idn">
                                                     <ItemTemplate>
@@ -119,7 +126,7 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ninfo") %>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Beacon ID" SortExpression="idb">
+                                                <asp:TemplateField HeaderText="Unit ID" SortExpression="idb">
                                                     <ItemTemplate>
                                                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("idb") %>'></asp:Label>
                                                     </ItemTemplate>
@@ -127,10 +134,40 @@
                                                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("idb") %>'></asp:Label>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <HeaderTemplate>
+                                                        Status:
+                                                        <asp:DropDownList ID="ddlStatus" runat="server"
+                                                        OnSelectedIndexChanged = "StatusChanged" AutoPostBack = "true"
+                                                                AppendDataBoundItems = "true">
+                                                        </asp:DropDownList>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("status") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("status") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Received" SortExpression="time">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("time") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("time") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Solved" SortExpression="timeUpdated">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("timeUpdated") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("timeUpdated") %>'></asp:Label>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
                                         <asp:Timer runat="server" ID="Timer2" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
-                                        <asp:Label runat="server" Text="Page not refreshed yet." ID="Label3"></asp:Label>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>

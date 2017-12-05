@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
 
 namespace WARDEN
 {
@@ -26,6 +27,7 @@ namespace WARDEN
 
             if (!IsPostBack)
             {
+                ViewState["Filter"] = "ALL";
                 Bind();
             }
 
@@ -39,19 +41,27 @@ namespace WARDEN
             MySqlCommand cmd3;
 
             con.Open();
-            cmd1 = new MySqlCommand("select idn, idb, ninfo from notifications", con); //TODO: sort by dateTime when adding in list
+            cmd1 = new MySqlCommand("select idn, idb, ninfo, time from notifications", con); //TODO: sort by dateTime when adding in list
             DataTable datatable1 = new DataTable();
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1);
             adapter1.Fill(datatable1);
             PendingRecordsGridview.DataSource = datatable1;
             PendingRecordsGridview.DataBind();
 
-            cmd2 = new MySqlCommand("select idn,idb, ninfo from history", con);
+            string sqlp = "status_by";
+            cmd2 = new MySqlCommand(sqlp, con);
             DataTable datatable2 = new DataTable();
-            MySqlDataAdapter adapter2 = new MySqlDataAdapter(cmd2);
+            cmd2.CommandType = CommandType.StoredProcedure;
+            cmd2.Parameters.AddWithValue("@con", ViewState["Filter"].ToString());
+            cmd2.Connection = con;
+            MySqlDataAdapter adapter2 = new MySqlDataAdapter();
+            adapter2.SelectCommand = cmd2;
             adapter2.Fill(datatable2);
             AcceptedRecordsGridview.DataSource = datatable2;
             AcceptedRecordsGridview.DataBind();
+            DropDownList ddlStatus =
+                    (DropDownList)AcceptedRecordsGridview.HeaderRow.FindControl("ddlStatus");
+            this.BindStatusList(ddlStatus);
 
             cmd3 = new MySqlCommand("SELECT COUNT(*) FROM notifications", con);
             int countRows;
@@ -69,7 +79,6 @@ namespace WARDEN
             {
                 count.Visible = false;
             }
-
 
             con.Close();
 
@@ -103,23 +112,37 @@ namespace WARDEN
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             Bind();
-            Label1.Text = "Panel refreshed at: " + DateTime.Now.ToLongTimeString();
-            Label3.Text = "Panel refreshed at: " + DateTime.Now.ToLongTimeString();
             UpdatePanel3.Update();
         }
 
-        /*
-        protected void nbutton_Click(object sender, EventArgs e)
+        private void BindStatusList(DropDownList ddlStatus)
         {
-            if (nlist.Visible)
-            {
-                nlist.Visible = false;
-            }
-            else
-            {
-                nlist.Visible = true;
-            }
+            MySqlConnection con = new MySqlConnection("Server=localhost;Database=warden;User id=root;");
+            MySqlDataAdapter adapter2 = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand("select distinct status" +
+                            " from history");
+            cmd.Connection = con;
+            con.Open();
+            ddlStatus.DataSource = cmd.ExecuteReader();
+            ddlStatus.DataTextField = "status";
+            ddlStatus.DataValueField = "status";
+            ddlStatus.DataBind();
+            con.Close();
+            ddlStatus.Items.FindByValue(ViewState["Filter"].ToString())
+                    .Selected = true;
         }
-        */
+
+        protected void StatusChanged(object sender, EventArgs e)
+        {
+            DropDownList ddlStatus = (DropDownList)sender;
+            ViewState["Filter"] = ddlStatus.SelectedValue;
+            this.Bind();
+        }
+
+        protected void OnPaging(object sender, GridViewPageEventArgs e)
+        {
+            AcceptedRecordsGridview.PageIndex = e.NewPageIndex;
+            this.Bind();
+        }
     }
 }

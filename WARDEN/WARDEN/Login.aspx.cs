@@ -22,18 +22,22 @@ namespace WARDEN
         {
             con.Open();
             MySqlCommand cmd1;
-            cmd1 = new MySqlCommand("select * from login where username = '" + user.Text + "' and password =password('" + pass.Text + "')", con);
+            cmd1 = new MySqlCommand("select * from login where username = '" + user.Text + "' and password = '" + pass.Text + "'", con);
             DataTable datatable1 = new DataTable();
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(cmd1);
             adapter1.Fill(datatable1);
+
             foreach (DataRow dr in datatable1.Rows)
             {
+                System.Diagnostics.Debug.WriteLine(dr["username"].ToString());
+
                 Session["username"] = dr["username"].ToString();
                 Response.Redirect("Home.aspx");
             }
 
-
             con.Close();
+
+            System.Diagnostics.Debug.WriteLine("helooo");
 
             feedback.Text = "Invalid username or password";
 
