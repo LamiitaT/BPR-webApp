@@ -353,18 +353,7 @@ namespace WARDEN
                 adapter2.SelectCommand = cmd2;
                 adapter2.Fill(datatable);
 
-                /* foreach(DataRow r in datatable.Rows)
-                {
-                    long time= (long)r["time"];
-                    System.Diagnostics.Debug.WriteLine(time +"this is the time");
-                    DateTime dtDateTime = new DateTime(time);
-                    System.Diagnostics.Debug.WriteLine(dtDateTime+"this is after convertion");
-                    DateTime timenow = DateTime.Now;
-                    long t = dtDateTime.Ticks;
-                    System.Diagnostics.Debug.WriteLine(t + "this is the time in tiks");
-                    r["time"] = dtDateTime.Ticks;
-                    r["timeUpdated"] = long.Parse(timenow.ToString("yyyyMMddHHmmss")); 
-                }*/
+             
 
                 con.Close();
                 return datatable;
