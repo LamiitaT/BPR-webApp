@@ -28,62 +28,58 @@
     <link rel="stylesheet" type="text/css" href="StyleSheet1.css?version = 8"/>
     <script src="js/jquery-3.2.1.js"></script>
     
-    <!--
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqDQBtzROxo895XNbCTaWXXa9ovUjoHG4&callback=initMap">
     </script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    
+        <script type="text/javascript">
+         var markers = [
+             <asp:Repeater ID="rptMarkers" runat="server">
+                 <ItemTemplate>
+                     {
+                         "title": '<%# Eval("ID") %>',
+                        "lat": '<%# Eval("x") %>',
+                        "lng": '<%# Eval("y") %>',
+                         "description": '<%# Eval("comments") %>'
+                      }
+                 </ItemTemplate>
+                  <SeparatorTemplate>
+                  ,
+                  </SeparatorTemplate>
+             </asp:Repeater >
+    ];
+        </script>
     <script>
-
         // This example displays a marker at the center of Australia.
         // When the user clicks the marker, an info window opens.
 
         function initMap() {
-            var uluru = { lat: -25.363, lng: 131.044 };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
-                center: uluru
-            });
-
-            var contentString = '<div id="content">' +
-                '<div id="siteNotice">' +
-                '</div>' +
-                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
-                '<div id="bodyContent">' +
-                '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                'sandstone rock formation in the southern part of the ' +
-                'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) ' +
-                'south west of the nearest large town, Alice Springs; 450&#160;km ' +
-                '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major ' +
-                'features of the Uluru - Kata Tjuta National Park. Uluru is ' +
-                'sacred to the Pitjantjatjara and Yankunytjatjara, the ' +
-                'Aboriginal people of the area. It has many springs, waterholes, ' +
-                'rock caves and ancient paintings. Uluru is listed as a World ' +
-                'Heritage Site.</p>' +
-                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-                'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
-                '(last visited June 22, 2009).</p>' +
-                '</div>' +
-                '</div>';
-
-            var infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
-
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map,
-                title: 'Uluru (Ayers Rock)'
-            });
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
+            var mapOptions = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i]
+                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.title
+                });
+                (function (marker, data) {
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        infoWindow.setContent("ID: " + data.title+ '\n' + data.description);
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+            }
         }
     </script>
-    -->
 
     <script type="text/javascript">
         $(document).ready(function () {
